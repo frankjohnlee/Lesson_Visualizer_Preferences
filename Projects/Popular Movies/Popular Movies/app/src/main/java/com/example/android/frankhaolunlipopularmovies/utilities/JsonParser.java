@@ -17,12 +17,12 @@ public class JsonParser {
         int beginningExtra = inputString.indexOf("[");
         int endExtra = inputString.length() - 2;
         String removedExtra = inputString.substring(beginningExtra + 1, endExtra);
-        this.print("removedExtra", removedExtra);
+        Log.d("removedExtra", removedExtra);
         return removedExtra;
     };
     public String[] stringArrayResults (String inputString){
         String[] stringArrayResults = inputString.split(", ");
-        this.printStringArray("stringArrayResults", stringArrayResults);
+        Log.d("stringArrayResults", stringArrayResults[0]);
         return stringArrayResults;
     }
     public void print (String name, String input){
