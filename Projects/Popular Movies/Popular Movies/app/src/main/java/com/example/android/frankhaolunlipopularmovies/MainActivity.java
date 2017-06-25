@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
-        implements MovieAdapter.ListItemClickListener {
+        implements OnTaskCompleted {
 
     private static final int NUM_LIST_ITEMS = 100;
     MyRecyclerViewAdapter adapter;
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity
     private MovieAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private Toast mToast;
-
 
 
     @Override

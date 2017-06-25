@@ -1,7 +1,5 @@
 package com.example.android.frankhaolunlipopularmovies.utilities;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,8 +33,6 @@ public class JsonParser {
 
 
     public ArrayList<HashMap<String, String>> ParseJson(String inputString) {
-
-
 
         if (inputString != null && inputString != "") {
             try {
