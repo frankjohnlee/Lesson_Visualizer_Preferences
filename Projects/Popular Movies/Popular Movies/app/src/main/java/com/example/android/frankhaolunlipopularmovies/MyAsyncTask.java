@@ -16,16 +16,7 @@ import java.util.HashMap;
 public class MyAsyncTask extends AsyncTask<Void, Void, ArrayList<HashMap<String, String>>> {
     private OnTaskCompleted listener;
 
-    public YourTask(OnTaskCompleted listener){
-        this.listener=listener;
-    }
 
-    // required methods
-
-    protected void onPostExecute(Object o){
-        // your stuff
-        listener.onTaskCompleted();
-    }
 
     private void makeSearchQuery() {
         /**
@@ -38,28 +29,28 @@ public class MyAsyncTask extends AsyncTask<Void, Void, ArrayList<HashMap<String,
         Log.d("searchUrl", searchUrl.toString());
         new QueryTask().execute(searchUrl);
     }
-    public class QueryTask extends AsyncTask<URL, Void, String> {
-        @Override
-        protected String doInBackground(URL... params) {
-            URL searchUrl = params[0];
-            String searchResults = null;
-            try {
-                searchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
-            } catch (IOException e) {
+
+    @Override
+    protected String doInBackground(URL... params) {
+        URL searchUrl = params[0];
+        String searchResults = null;
+        try {
+            searchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+        } catch (IOException e) {
                 e.printStackTrace();
-            }
-            Log.d("searchResults", searchResults);
-            return searchResults;
+        }
+        return searchResults;
         }
 
-        @Override
-        protected void onPostExecute(String searchResults) {
-            if (searchResults != null && !searchResults.equals("")) {
-                ArrayList<HashMap<String, String>>
-                        movieList = JsonParser.ParseJson(searchResults);
+    @Override
+    protected ArrayList<HashMap<String, String>> onPostExecute(String searchResults) {
 
+        if (searchResults != null && !searchResults.equals("")) {
+            ArrayList<HashMap<String, String>>
+                    movieList = JsonParser.ParseJson(searchResults);
+            return movieList;
 
-
-            }
         }
+        return null;
+    }
 }

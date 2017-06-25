@@ -22,6 +22,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity
         implements OnTaskCompleted {
 
+
     private static final int NUM_LIST_ITEMS = 100;
     MyRecyclerViewAdapter adapter;
 
