@@ -39,6 +39,20 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
     private VisualizerView mVisualizerView;
     private AudioInputReader mAudioInputReader;
 
+    // Bass Values
+    String bassKey = getString(R.string.pref_show_bass_key);
+    boolean bassDefaultBool = getResources().getBoolean(R.bool.pref_show_bass_default);
+
+    // Mid Values
+    String midKey = getString(R.string.pref_show_mid_key);;
+    boolean midDefaultBool = getResources().getBoolean(R.bool.pref_show_mid_default);;
+
+    // Treble Values
+    String trebleKey = getString(R.string.pref_show_treble_key);;
+    boolean trebleDefaultBool = getResources().getBoolean(R.bool.pref_show_treble_default);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +62,18 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         setupPermissions();
     }
 
-    // TODO (4) Update the code in setupSharedPreferences and onSharedPreferenceChanged to update
+    // (4) Update the code in setupSharedPreferences and onSharedPreferenceChanged to update
     // mVisualizerView to show the current values stored in shared preferences.
     private void setupSharedPreferences() {
         // Get all of the values from shared preferences to set it up
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mVisualizerView.setShowBass(sharedPreferences.getBoolean(getString(R.string.pref_show_bass_key),
-                getResources().getBoolean(R.bool.pref_show_bass_default)));
+        mVisualizerView.setShowBass(sharedPreferences.getBoolean(bassKey, bassDefaultBool));
+        mVisualizerView.setShowBass(sharedPreferences.getBoolean(midKey, midDefaultBool));
+        mVisualizerView.setShowBass(sharedPreferences.getBoolean(trebleKey, trebleDefaultBool));
+
         mVisualizerView.setShowMid(true);
         mVisualizerView.setShowTreble(true);
+        mVisualizerView.setShowBass(true);
         mVisualizerView.setMinSizeScale(1);
         mVisualizerView.setColor(getString(R.string.pref_color_red_value));
         // Register the listener
@@ -65,8 +82,21 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.pref_show_bass_key))) {
-            mVisualizerView.setShowBass(sharedPreferences.getBoolean(key, getResources().getBoolean(R.bool.pref_show_bass_default)));
+
+
+        // Bass Preference
+        if (key.equals(bassKey)) {
+            mVisualizerView.setShowBass(sharedPreferences.getBoolean(key, bassDefaultBool));
+        }
+
+        // Mid Preference
+        if (key.equals(midKey)) {
+            mVisualizerView.setShowBass(sharedPreferences.getBoolean(key, midDefaultBool));
+        }
+
+        // Treble Preference
+        if (key.equals(trebleKey)) {
+            mVisualizerView.setShowBass(sharedPreferences.getBoolean(key, trebleDefaultBool));
         }
     }
 
